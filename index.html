@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>ADIP Galaxy</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #0a0a2a, #000);
+  font-family: Arial, sans-serif;
+}
+
+/* bintang galaxy ringan */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 45px 45px;
+  opacity: 0.3;
+  animation: move 20s linear infinite;
+}
+
+@keyframes move {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* tulisan ADIP */
+h1 {
+  font-size: 80px;
+  color: white;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px #00f,
+    0 0 20px #f00,
+    0 0 30px #00f;
+  animation: glow 2s infinite alternate;
+}
+
+/* efek glow pelan */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px blue, 0 0 20px red;
+    transform: scale(1);
+  }
+  100% {
+    text-shadow: 0 0 20px red, 0 0 30px blue;
+    transform: scale(1.05);
+  }
+}
+</style>
+
+</head>
+<body>
+
+<div class="stars"></div>
+<h1>ADIP</h1>
+
+</body>
+</html>
