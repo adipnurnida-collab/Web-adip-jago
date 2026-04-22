@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>ADIP Galaxy</title>
+<title>Felix Love Citra</title>
 
 <style>
 body {
@@ -16,46 +16,67 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* bintang galaxy ringan */
+/* bintang ringan */
 .stars {
   position: absolute;
   width: 100%;
   height: 100%;
   background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: move 15s linear infinite;
-  opacity: 0.4;
+  background-size: 50px 50px;
+  opacity: 0.3;
 }
 
-@keyframes move {
-  from { transform: translateY(0); }
-  to { transform: translateY(-200px); }
-}
-
-/* tulisan ADIP */
-h1 {
-  font-size: 70px;
-  color: white;
-  letter-spacing: 10px;
-  text-transform: uppercase;
+/* container tengah */
+.container {
   position: relative;
-  text-shadow: 
-    0 0 10px #00f,
-    0 0 20px #f00,
-    0 0 30px #00f;
-  animation: glow 2s infinite alternate;
+  text-align: center;
 }
 
-/* efek glow pelan */
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 10px blue, 0 0 20px red;
-    transform: scale(1);
-  }
-  100% {
-    text-shadow: 0 0 20px red, 0 0 30px blue;
-    transform: scale(1.05);
-  }
+/* teks */
+h1 {
+  color: white;
+  font-size: 45px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px red, 0 0 20px blue;
+  margin-bottom: 30px;
+}
+
+/* hati */
+.heart {
+  width: 80px;
+  height: 80px;
+  background: red;
+  position: relative;
+  transform: rotate(45deg);
+  margin: auto;
+  animation: spin 6s linear infinite;
+}
+
+/* bentuk hati */
+.heart::before,
+.heart::after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -40px;
+  left: 0;
+}
+
+.heart::after {
+  left: -40px;
+  top: 0;
+}
+
+/* putar pelan (anti lag) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 </style>
 
@@ -63,7 +84,11 @@ h1 {
 <body>
 
 <div class="stars"></div>
-<h1>ADIP</h1>
+
+<div class="container">
+  <h1>FELIX ♥ CITRA</h1>
+  <div class="heart"></div>
+</div>
 
 </body>
 </html>
