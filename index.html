@@ -2,93 +2,51 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Felix Love Citra</title>
+<title>Racing 2D</title>
 
 <style>
 body {
   margin: 0;
-  height: 100vh;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle, #0b0b2a, #000);
-  font-family: Arial, sans-serif;
+  background: #111;
+  font-family: Arial;
 }
 
-/* bintang ringan */
-.stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.3;
-}
-
-/* container tengah */
-.container {
-  position: relative;
-  text-align: center;
-}
-
-/* teks */
-h1 {
-  color: white;
-  font-size: 45px;
-  letter-spacing: 3px;
-  text-shadow: 0 0 10px red, 0 0 20px blue;
-  margin-bottom: 30px;
-}
-
-/* hati */
-.heart {
-  width: 80px;
-  height: 80px;
-  background: red;
-  position: relative;
-  transform: rotate(45deg);
+canvas {
+  display: block;
   margin: auto;
-  animation: spin 6s linear infinite;
+  background: #222;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
 }
 
-/* bentuk hati */
-.heart::before,
-.heart::after {
-  content: "";
-  width: 80px;
-  height: 80px;
-  background: red;
-  border-radius: 50%;
-  position: absolute;
-}
-
-.heart::before {
-  top: -40px;
-  left: 0;
-}
-
-.heart::after {
-  left: -40px;
-  top: 0;
-}
-
-/* putar pelan (anti lag) */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.info {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
 }
 </style>
-
 </head>
 <body>
 
-<div class="stars"></div>
+<div class="info">Gunakan ← → untuk pindah jalur</div>
+<canvas id="game" width="300" height="500"></canvas>
 
-<div class="container">
-  <h1>FELIX ♥ CITRA</h1>
-  <div class="heart"></div>
-</div>
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-</body>
-</html>
+let car = {
+  x: 130,
+  y: 420,
+  w: 40,
+  h: 60
+};
+
+let keys = {};
+let roadSpeed = 5;
+let score = 0;
+
+document.addEventListener("keydown
