@@ -2,74 +2,56 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Shooting Game</title>
+<title>Outer Space</title>
 
 <style>
 body {
   margin: 0;
   overflow: hidden;
-  background: #000;
-  font-family: Arial;
+  background: black;
 }
 
+/* canvas full layar */
 canvas {
   display: block;
-  margin: auto;
-  background: #111;
-  border: 2px solid white;
-}
-
-.info {
-  position: fixed;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  color: white;
 }
 </style>
 </head>
 <body>
 
-<div class="info">← → gerak | SPACE tembak</div>
-<canvas id="game" width="300" height="500"></canvas>
+<canvas id="space"></canvas>
 
 <script>
-const canvas = document.getElementById("game");
+const canvas = document.getElementById("space");
 const ctx = canvas.getContext("2d");
 
-let player = { x: 130, y: 430, w: 40, h: 40 };
-let bullets = [];
-let enemies = [];
-let keys = {};
-let score = 0;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// kontrol
-document.addEventListener("keydown", e => {
-  keys[e.key] = true;
+// bintang
+let stars = [];
 
-  if (e.code === "Space") {
-    bullets.push({ x: player.x + 15, y: player.y, w: 5, h: 10 });
-  }
-});
-
-document.addEventListener("keyup", e => keys[e.key] = false);
-
-// enemy spawn
-setInterval(() => {
-  enemies.push({
-    x: Math.random() * 260,
-    y: -20,
-    w: 30,
-    h: 30
+for (let i = 0; i < 120; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2,
+    speed: Math.random() * 1 + 0.2
   });
-}, 1000);
+}
 
-// update game
-function update() {
-  if (keys["ArrowLeft"] && player.x > 0) player.x -= 5;
-  if (keys["ArrowRight"] && player.x < 260) player.x += 5;
+function drawStars() {
+  ctx.fillStyle = "white";
 
-  bullets.forEach(b => b.y -= 7);
-  enemies.forEach(e => e.y += 2);
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
 
-  // collision
+    // gerak ke bawah
+    s.y += s.speed;
+
+    // reset kalau keluar layar
+    if (s.y > canvas.height) {
+      s.y = 0;
+      s.x = Math
