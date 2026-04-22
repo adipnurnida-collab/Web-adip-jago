@@ -2,67 +2,77 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>ADIP Galaxy</title>
+<title>Space Fix</title>
 
 <style>
 body {
   margin: 0;
-  height: 100vh;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle, #0a0a2a, #000);
-  font-family: Arial, sans-serif;
+  background: black;
 }
-
-/* bintang galaxy ringan */
-.stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 45px 45px;
-  opacity: 0.3;
-  animation: move 20s linear infinite;
-}
-
-@keyframes move {
-  from { transform: translateY(0); }
-  to { transform: translateY(-200px); }
-}
-
-/* tulisan ADIP */
-h1 {
-  font-size: 80px;
-  color: white;
-  letter-spacing: 10px;
-  text-transform: uppercase;
-  text-shadow:
-    0 0 10px #00f,
-    0 0 20px #f00,
-    0 0 30px #00f;
-  animation: glow 2s infinite alternate;
-}
-
-/* efek glow pelan */
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 10px blue, 0 0 20px red;
-    transform: scale(1);
-  }
-  100% {
-    text-shadow: 0 0 20px red, 0 0 30px blue;
-    transform: scale(1.05);
-  }
+canvas {
+  display: block;
 }
 </style>
-
 </head>
 <body>
 
-<div class="stars"></div>
-<h1>ADIP</h1>
+<canvas id="space"></canvas>
+
+<script>
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+// FIX ukuran biar tidak blank di HP
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+// bintang
+let stars = [];
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 100; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 1.5 + 0.2,
+      speed: Math.random() * 0.8 + 0.2
+    });
+  }
+}
+initStars();
+
+function draw() {
+  // background gelap (sedikit abu biar keliatan)
+  ctx.fillStyle = "#000010";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // bintang
+  ctx.fillStyle = "white";
+
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    s.y += s.speed;
+
+    if (s.y > canvas.height) {
+      s.y = 0;
+      s.x = Math.random() * canvas.width;
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
 
 </body>
 </html>
