@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Felix Neon</title>
+<title>ADIP</title>
 
 <style>
 body {
@@ -11,56 +11,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle, #0a0a1a, #000);
-  font-family: Arial;
-  overflow: hidden;
+  background: #000;
+  font-family: Arial, sans-serif;
 }
 
-/* teks di tengah layar HP */
 h1 {
-  font-size: 60px;
+  font-size: 70px;
   color: white;
-  position: relative;
-  padding: 20px 40px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-}
-
-/* efek pinggir kedip (bukan tulisan) */
-h1::before,
-h1::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 10px;
-  border: 2px solid red;
-  animation: blink 1.2s infinite alternate;
-}
-
-/* layer kedua biru */
-h1::after {
-  border-color: blue;
-  filter: blur(4px);
-  animation-delay: 0.6s;
-}
-
-/* animasi kedip pinggir */
-@keyframes blink {
-  0% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
+  letter-spacing: 8px;
 }
 </style>
 
 </head>
 <body>
 
-<h1>FELIX</h1>
+<h1>ADIP</h1>
 
 </body>
 </html>
