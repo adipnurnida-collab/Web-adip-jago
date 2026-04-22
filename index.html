@@ -2,22 +2,21 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Racing 2D</title>
+<title>Shooting Game</title>
 
 <style>
 body {
   margin: 0;
   overflow: hidden;
-  background: #111;
+  background: #000;
   font-family: Arial;
 }
 
 canvas {
   display: block;
   margin: auto;
-  background: #222;
-  border-left: 3px solid white;
-  border-right: 3px solid white;
+  background: #111;
+  border: 2px solid white;
 }
 
 .info {
@@ -31,22 +30,46 @@ canvas {
 </head>
 <body>
 
-<div class="info">Gunakan ← → untuk pindah jalur</div>
+<div class="info">← → gerak | SPACE tembak</div>
 <canvas id="game" width="300" height="500"></canvas>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-let car = {
-  x: 130,
-  y: 420,
-  w: 40,
-  h: 60
-};
-
+let player = { x: 130, y: 430, w: 40, h: 40 };
+let bullets = [];
+let enemies = [];
 let keys = {};
-let roadSpeed = 5;
 let score = 0;
 
-document.addEventListener("keydown
+// kontrol
+document.addEventListener("keydown", e => {
+  keys[e.key] = true;
+
+  if (e.code === "Space") {
+    bullets.push({ x: player.x + 15, y: player.y, w: 5, h: 10 });
+  }
+});
+
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// enemy spawn
+setInterval(() => {
+  enemies.push({
+    x: Math.random() * 260,
+    y: -20,
+    w: 30,
+    h: 30
+  });
+}, 1000);
+
+// update game
+function update() {
+  if (keys["ArrowLeft"] && player.x > 0) player.x -= 5;
+  if (keys["ArrowRight"] && player.x < 260) player.x += 5;
+
+  bullets.forEach(b => b.y -= 7);
+  enemies.forEach(e => e.y += 2);
+
+  // collision
